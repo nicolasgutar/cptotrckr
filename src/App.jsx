@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import CoinDropdown from './components/CoinDropdown';
 import CoinDisplay from './components/CoinDisplay';
-import HalvingCountdown from './components/HalvingCountdown';
+import HalvingCountdown from './components/HalvingCountDown.jsx';
 import useCryptoData from './hooks/useCryptoData';
 import './styles/index.css';
 
