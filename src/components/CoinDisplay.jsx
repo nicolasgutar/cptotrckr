@@ -1,18 +1,18 @@
-// src/components/CoinDisplay.js
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 const CoinDisplay = ({ coinData }) => {
-    if (!coinData) return <p className="text-gray-500">Loading...</p>;
+    const intl = useIntl();
 
-    // Determine if the price change is positive or negative
+    if (!coinData) return <p className="text-gray-500">{intl.formatMessage({ id: 'coinDisplay.loading', defaultMessage: 'Loading...' })}</p>;
+
     const isPositive = coinData.price_change_percentage_24h >= 0;
 
-    // Conditional formatting for price precision
     const formatPrice = (price) => {
         if (price < 1) {
-            return price.toFixed(7); // Display up to six decimal places for small values
+            return price.toFixed(7);
         }
-        return price.toLocaleString(); // Use standard formatting for larger values
+        return price.toLocaleString();
     };
 
     return (
@@ -23,10 +23,12 @@ const CoinDisplay = ({ coinData }) => {
             </div>
             <div className="mt-4">
                 <p className="text-gray-700 text-lg">
-                    Current Price: <span className="font-medium">${formatPrice(coinData.current_price)}</span>
+                    {intl.formatMessage({ id: 'coinDisplay.currentPrice', defaultMessage: 'Current Price:' })}{' '}
+                    <span className="font-medium">${formatPrice(coinData.current_price)}</span>
                 </p>
                 <p className={`text-lg mt-2 ${isPositive ? 'text-green-500' : 'text-red-500'}`}>
-                    24h Change: {coinData.price_change_percentage_24h.toFixed(2)}%
+                    {intl.formatMessage({ id: 'coinDisplay.change24h', defaultMessage: '24h Change:' })}{' '}
+                    {coinData.price_change_percentage_24h.toFixed(2)}%
                 </p>
             </div>
         </div>

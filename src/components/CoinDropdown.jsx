@@ -1,7 +1,9 @@
-// src/components/CoinDropdown.js
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 const CoinDropdown = ({ selectedCoin, setSelectedCoin }) => {
+    const intl = useIntl();
+
     const coins = [
         { id: 'bitcoin', name: 'Bitcoin' },
         { id: 'ethereum', name: 'Ethereum' },
@@ -9,9 +11,9 @@ const CoinDropdown = ({ selectedCoin, setSelectedCoin }) => {
     ];
 
     return (
-        <div className="mt-4 mb-6"> {/* Added mb-6 for spacing */}
+        <div className="mt-4 mb-6">
             <label htmlFor="coin-select" className="block text-gray-700 mb-2">
-                Select a cryptocurrency:
+                {intl.formatMessage({ id: 'coinDropdown.label', defaultMessage: 'Select a cryptocurrency:' })}
             </label>
             <select
                 id="coin-select"
@@ -21,7 +23,7 @@ const CoinDropdown = ({ selectedCoin, setSelectedCoin }) => {
             >
                 {coins.map((coin) => (
                     <option key={coin.id} value={coin.id} className="text-gray-800">
-                        {coin.name}
+                        {intl.formatMessage({ id: `coinDropdown.${coin.id}`, defaultMessage: coin.name })}
                     </option>
                 ))}
             </select>

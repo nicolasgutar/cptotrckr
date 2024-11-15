@@ -1,7 +1,6 @@
-// src/components/Navbar.jsx
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useIntl } from 'react-intl';
 import { useLocale } from '../LocaleContext.jsx';
 
 const Navbar = () => {
@@ -10,8 +9,8 @@ const Navbar = () => {
     const dropdownRef = useRef(null);
     const languageDropdownRef = useRef(null);
     const { locale, toggleLocale } = useLocale();
+    const intl = useIntl();
 
-    // Close dropdowns when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -31,22 +30,18 @@ const Navbar = () => {
         <nav className="bg-white shadow-md">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
-                    {/* Left Side */}
                     <div className="flex items-center">
                         <Link to="/" className="text-2xl font-bold text-gray-800">
-                            Tracker
+                            {intl.formatMessage({ id: 'navbar.tracker' })}
                         </Link>
                     </div>
-
-                    {/* Right Side */}
                     <div className="flex items-center space-x-4">
-                        {/* Learn Dropdown */}
                         <div className="relative" ref={dropdownRef}>
                             <button
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                 className="text-gray-800 font-medium focus:outline-none"
                             >
-                                Learn
+                                {intl.formatMessage({ id: 'navbar.learn' })}
                             </button>
                             {isDropdownOpen && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
@@ -55,27 +50,25 @@ const Navbar = () => {
                                         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                                         onClick={() => setIsDropdownOpen(false)}
                                     >
-                                        Bitcoin
+                                        {intl.formatMessage({ id: 'navbar.bitcoin' })}
                                     </Link>
                                     <Link
                                         to="/ethereum"
                                         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                                         onClick={() => setIsDropdownOpen(false)}
                                     >
-                                        Ethereum
+                                        {intl.formatMessage({ id: 'navbar.ethereum' })}
                                     </Link>
                                     <Link
                                         to="/shiba-inu"
                                         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                                         onClick={() => setIsDropdownOpen(false)}
                                     >
-                                        Shiba Inu
+                                        {intl.formatMessage({ id: 'navbar.shibaInu' })}
                                     </Link>
                                 </div>
                             )}
                         </div>
-
-                        {/* Language Selector Dropdown */}
                         <div className="relative" ref={languageDropdownRef}>
                             <button
                                 onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
